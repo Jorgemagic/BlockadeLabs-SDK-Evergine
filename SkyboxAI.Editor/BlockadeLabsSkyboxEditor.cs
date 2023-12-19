@@ -23,17 +23,6 @@ namespace SkyboxAI
             await this.component.GetSkyboxStyleOptions();
 
             this.propertyPanelContainer.InvalidateLayout();
-
-            this.propertyPanelContainer.PropertyUpdated -= PropertyPanelContainer_PropertyUpdated;
-            this.propertyPanelContainer.PropertyUpdated += PropertyPanelContainer_PropertyUpdated;
-        }
-
-        private void PropertyPanelContainer_PropertyUpdated(object sender, string e)
-        {
-            if (e == nameof(this.component.Percentage))
-            {
-                this.propertyPanelContainer.InvalidateLayout();
-            }
         }
 
         public override void GenerateUI()
@@ -57,9 +46,9 @@ namespace SkyboxAI
                 getValue: () => this.component.skyboxStyleSelected,
                 setValue: (x) => this.component.skyboxStyleSelected = x);
 
-            this.propertyPanelContainer.AddLabel(
-                nameof(Percentage),
-                $"{this.component.Percentage}%");
+            ////this.propertyPanelContainer.AddLabel(
+            ////    nameof(Percentage),
+            ////    $"{this.component.Percentage}%");
 
             this.propertyPanelContainer.AddButton(
                 nameof(GenerateAISkybox),

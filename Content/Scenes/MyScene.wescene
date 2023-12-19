@@ -153,7 +153,7 @@ Items:
         Id: bb44cd62-4d92-418a-8a42-bbc2ed2b6f07
         AsignedTo: Default
         IsEnabled: true
-        Material: 8b1cfd61-5339-4b54-a7ce-ad5173e43be1
+        Material: 9c4f8aa4-65c9-47ae-ae24-3843399936ec
         UseCopy: false
       - !Evergine.Components.Graphics3D.SphereMesh,Evergine.Components
         Id: 3ef37285-f016-4173-bbf0-278ec1624224
@@ -214,6 +214,7 @@ Items:
       - !SkyboxAI.Components.BlockadeLabsSkybox,SkyboxAI
         Id: 59e53928-8fd5-4372-8b74-10e89db23df8
         IsEnabled: true
+        Percentage: -1
         Prompt: Puzzle castles
         apiKey: 7SFtmkXQbBVN5CWm4Ib2y0cD32W5uE310QaUqRMsvsdCx38VmTPAxJO2pEqz
         percentageCompleted: -1
@@ -275,7 +276,7 @@ Managers:
     IBLReflectionProbe: 6f51bee0-e1b6-412c-bb2b-aefabee774e6
     IntensityMultiplier: 1.0
     IsEnabled: true
-    Strategy: Automatically
+    Strategy: OnDemand
   - !Evergine.Framework.Managers.RenderManager,Evergine.Framework
     Id: 74d7b50a-648a-4ed3-9529-2bc370878c12
     DebugLines: false
