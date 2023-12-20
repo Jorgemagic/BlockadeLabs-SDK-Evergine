@@ -5,10 +5,14 @@ using Evergine.Framework;
 using Evergine.Framework.Graphics.Effects;
 using Evergine.Framework.Graphics.Materials;
 using Evergine.Framework.Services;
+using Evergine.Platform;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,6 +45,9 @@ namespace SkyboxAI.Components
 
         [BindService]
         private AssetsService assetsService;
+
+        [BindService]
+        private AssetsDirectory assetsDirectory;
 
         private GraphicsContext graphicsContext;
         private Effect skyboxEffect;
@@ -167,16 +174,16 @@ namespace SkyboxAI.Components
 
             ////var createSkyboxObfuscatedId = await ApiRequests.CreateSkybox(skyboxStyleFields, id, apiKey);
             await Task.Delay(0);
-            var createSkyboxObfuscatedId = "caffa49480105a7a12616d3023bb31b1";
-            ///1e4ce7151c692b9379c9e308fe592ddc
-            ///e4ca6941be9568ad852c28eaa40d868b
+            ///var createSkyboxObfuscatedId = "caffa49480105a7a12616d3023bb31b1";
+            ///var createSkyboxObfuscatedId = "1e4ce7151c692b9379c9e308fe592ddc";
+            var createSkyboxObfuscatedId = "e4ca6941be9568ad852c28eaa40d868b";
 
             Debug.WriteLine($"Skybox id:{createSkyboxObfuscatedId}");
 
-            this.InitializeGetAssets(createSkyboxObfuscatedId);
+            await this.InitializeGetAssets(createSkyboxObfuscatedId);
         }
 
-        private async void InitializeGetAssets(string createImagineObfuscatedId)
+        private async Task InitializeGetAssets(string createImagineObfuscatedId)
         {
             if (createImagineObfuscatedId != string.Empty)
             {
@@ -219,7 +226,7 @@ namespace SkyboxAI.Components
                 {
                     var data = await ApiRequests.GetImagineImage(textureUrl);
 
-                    this.CreateTexture(data);
+                    this.CreateTexture(data, createImagineObfuscatedId);
                 }
 
                 this.Percentage = 100;
@@ -228,14 +235,14 @@ namespace SkyboxAI.Components
             }
         }
 
-        private void CreateTexture(byte[] data)
+        private void CreateTexture(byte[] data, string createImagineObfuscatedId)
         {
             // Create texture
             Debug.WriteLine("Creating texture...");
             Texture texture2D = null;
             using (var image = SixLabors.ImageSharp.Image.Load<Rgba32>(data))
-            {             
-                ////image.SaveAsync(skyboxStyleSelected, new JpegEncoder());
+            {
+                this.SaveSkybox(image, createImagineObfuscatedId);
                 RawImageLoader.CopyImageToArrayPool(image, out _, out byte[] rgbaData);
                 var description = new TextureDescription()
                 {
@@ -292,6 +299,33 @@ namespace SkyboxAI.Components
             }
 
             return prompt.TrimStart('_').TrimEnd('_');
+        }
+
+        private void SaveSkybox(Image image, string createImagineObfuscatedId)
+        {
+            var root = this.assetsDirectory.RootPath;
+            var baseDir = this.TryGetSolutionDirectoryInfo(root);
+            var enviromentDir = $"{baseDir}/Content/Enviroments/";
+
+            if (!Directory.Exists(enviromentDir))
+            {
+                Directory.CreateDirectory(enviromentDir);
+            }
+
+            var path = $"{enviromentDir}{createImagineObfuscatedId}.jpg";
+            image.SaveAsJpeg(path);
+            Debug.WriteLine($"Saved image in {path}");
+        }
+
+        private DirectoryInfo TryGetSolutionDirectoryInfo(string currentPath = null)
+        {
+            var directory = new DirectoryInfo(
+                currentPath ?? Directory.GetCurrentDirectory());
+            while (directory != null && !directory.GetFiles("*.sln").Any())
+            {
+                directory = directory.Parent;
+            }
+            return directory;
         }
     }
 }
