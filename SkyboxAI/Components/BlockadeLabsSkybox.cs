@@ -172,11 +172,11 @@ namespace SkyboxAI.Components
             this.isCancelled = false;
             this.Percentage = 1;
 
-            ////var createSkyboxObfuscatedId = await ApiRequests.CreateSkybox(skyboxStyleFields, id, apiKey);
+            var createSkyboxObfuscatedId = await ApiRequests.CreateSkybox(skyboxStyleFields, id, apiKey);
             await Task.Delay(0);
-            ///var createSkyboxObfuscatedId = "caffa49480105a7a12616d3023bb31b1";
-            ///var createSkyboxObfuscatedId = "1e4ce7151c692b9379c9e308fe592ddc";
-            var createSkyboxObfuscatedId = "e4ca6941be9568ad852c28eaa40d868b";
+            ////var createSkyboxObfuscatedId = "caffa49480105a7a12616d3023bb31b1";
+            ////var createSkyboxObfuscatedId = "1e4ce7151c692b9379c9e308fe592ddc";
+            ////var createSkyboxObfuscatedId = "e4ca6941be9568ad852c28eaa40d868b";
 
             Debug.WriteLine($"Skybox id:{createSkyboxObfuscatedId}");
 
