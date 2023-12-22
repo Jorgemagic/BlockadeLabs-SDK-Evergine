@@ -1,33 +1,31 @@
-# SkyboxAI
+# BlockadeLabs Skybox Integration for Evergine
+This project demonstrates the integration of the BlockadeLabs skybox service into Evergine. With this integration, you can easily create stunning skyboxes by introducing a prompt text and leveraging the BlockadeGenerative AI service.
 
-## Introduction
+**Note: This integration is unofficial, and the project is intended for recreational use only.**
 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.
+## Usage
+Obtain your API key from BlockadeLabs Skybox.
 
-## Getting Started
+Set your API key in the BlockadeLabsSkybox component within your Evergine project.
 
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+Use the prompt field to write a description for your desired skybox.
 
-1. Installation process
-2. Software dependencies
-3. Latest releases
-4. API references
+Click the "Generate" button to request the creation of a new skybox.
 
-## Build and Test
+The generated skybox texture will be stored in your Content/Environment folder.
 
-TODO: Describe and show how to build your code and run the tests.
+## Requirements
+Make sure you have the following prerequisites installed:
 
-## Contribute
+* Visual Studio 2022 with .NET 8 support.
+* A BlockadeLabs account to generate an API key.
+* Evergine version 2023.9.28.
 
-TODO: Explain how other users and developers can contribute to make your code better.
+## How to Get Started
+* Clone this repository to your local machine.
+* Open the project in Evergine Studio.
+* Set your BlockadeLabs API key in the **BlockadeLabsSkybox** component.
+* Use the BlockadeLabsSkybox component to create and visualize your custom skyboxes.
+Feel free to explore and experiment with different prompts to generate unique skybox designs.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops).
-
-----
-Powered by **[Evergine](http://www.evergine.com)**
-
-LET'S CONNECT!
-
-- [Youtube](https://www.youtube.com/subscription_center?add_user=EvergineChannel)
-- [Twitter](https://twitter.com/EvergineTeam)
-- [Blog](http://geeks.ms/evergineteam/)
+Enjoy creating mesmerizing skyboxes with BlockadeLabs and Evergine!
